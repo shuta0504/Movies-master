@@ -3,6 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>ログイン - Movies App</title>
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -162,6 +163,11 @@
 		<div th:if="${param.error}" class="message" style="background-color: #e87c03;">
 			ユーザー名またはパスワードが違います。
 		</div>
+		<!--新規登録が成功した際に表示する-->
+		<div th:if="${param.register_success}" class="message" style="background-color: #2e7d32;">
+			ユーザー登録が完了しました。</br>
+			ログインしてください。
+		</div>
 
 		<div th:if="${param.logout}" class="message" style="background-color: #2b78e4;">
 			ログアウトしました。
@@ -180,6 +186,12 @@
 
 			<button type="submit">ログイン</button>
 		</form>
+		<div style="margin-top: 20px;">
+			<a th:href="@{/register}"
+				style="color: #ccc; text-decoration: none; font-family: 'Noto Sans JP', sans-serif; font-size: 14px;">
+				新規登録はこちら
+			</a>
+		</div>
 	</div>
 </body>
 

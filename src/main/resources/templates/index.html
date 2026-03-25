@@ -4,6 +4,7 @@
 
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>MOVIES FAN</title>
 		<style>
 			body {
@@ -74,6 +75,65 @@
 				display: block;
 				margin: 10px auto;
 			}
+
+			.logout-form-the-end {
+				display: inline-block;
+			}
+
+			.btn-the-end {
+				background: transparent;
+				border: 2px solid #e50914;
+				/* ログインボタンと同じ赤 */
+				color: #fff;
+				padding: 5px 20px;
+				cursor: pointer;
+				transition: all 0.4s ease;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.btn-the-end .small-text {
+				display: block;
+				font-family: 'Cinzel', serif;
+				/* 映画のタイトル風フォント */
+				font-size: 10px;
+				line-height: 1;
+			}
+
+			.btn-the-end .main-text {
+				font-family: 'Bebas Neue', sans-serif;
+				/* ログイン画面のメインフォント */
+				font-size: 20px;
+				letter-spacing: 3px;
+			}
+
+			.btn-the-end:hover {
+				background: #e50914;
+				box-shadow: 0 0 20px rgba(229, 9, 20, 0.6);
+				transform: scale(1.05);
+			}
+
+			/* index.html の <style> の最後に追加 */
+			@media (max-width: 768px) {
+				.post-card {
+					max-width: 95%;
+					/* 横幅を画面いっぱいに広げる */
+					padding: 10px;
+					/* 余白を少し削る */
+				}
+
+				h1 {
+					font-size: 1.5em;
+					/* タイトルを少し小さくする */
+				}
+
+				.btn-new-post {
+					width: 80%;
+					/* 新規投稿ボタンを押しやすく大きくする */
+					text-align: center;
+				}
+
+			}
 		</style>
 		<link rel="stylesheet" th:href="@{/css/style.css}">
 	</head>
@@ -94,6 +154,12 @@
 		<div class="post-new-wrapper">
 			<a th:href="@{/post/new}" class="btn-new-post">+新規投稿を作成</a>
 		</div>
+		<form th:action="@{/logout}" method="post" class="logout-form-the-end">
+			<button type="submit" class="btn-the-end">
+				<span class="small-text">Fin.</span>
+				<span class="main-text">LOGOUT</span>
+			</button>
+		</form>
 		<hr>
 
 		<div class="post-wrapper">
@@ -107,6 +173,11 @@
 				<div class="media-container">
 					<img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="投稿画像">
 					<video th:if="${post.videoUrl}" th:src="${post.videoUrl}" controls></video>
+
+					<div class="video-container" th:if="${post.youtubeVideoId != null and !post.youtubeVideoId.empty}">
+						<iframe th:src="'https://www.youtube.com/embed/' + ${post.youtubeVideoId}" frameborder="0"
+							allowfullscreen></iframe>
+					</div>
 				</div>
 				<div class="comment-section" style="margin-top: 15px; border-top: 1px solid #333; padding-top: 10px;">
 

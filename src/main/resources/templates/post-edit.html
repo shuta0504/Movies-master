@@ -1,5 +1,6 @@
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>投稿の編集</title>
 	<style>
 		/* 全体の設定 */
@@ -124,6 +125,11 @@
 			<div class="form-group">
 				<label>動画を差し替える</label>
 				<input type="file" name="videoFile" accept="video/*" />
+			</div>
+			
+			<div class="form-group">
+			    <label>YouTube 動画ID</label>
+			    <input type="text" name="youtubeVideoId" th:value="${post.youtubeVideoId}" placeholder="例: dQw4w9WgXcQ" />
 			</div>
 
 			<button type="submit">更新を保存する</button>

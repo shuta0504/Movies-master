@@ -19,16 +19,17 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-	    http.csrf(csrf -> csrf.disable())
-	        .authorizeHttpRequests(auth -> auth
-	            .requestMatchers("/", "/post/**", "/comment/**", "/login", "/css/**", "/js/**", "/images/**").permitAll()
-	            // ★以下の1行を念のため追加（/comment/ 配下の全てのPOST/GETを許可）
-	            .requestMatchers("/comment/**").permitAll() 
-	            .anyRequest().authenticated())
-	        .formLogin(login -> login.loginPage("/login").defaultSuccessUrl("/", true).permitAll())
-	        .logout(logout -> logout.logoutSuccessUrl("/login?logout").permitAll());
+		http.csrf(csrf -> csrf.disable())
+				.authorizeHttpRequests(auth -> auth
+						.requestMatchers("/", "/register", "/post/**", "/comment/**", "/login", "/css/**", "/js/**",
+								"/images/**")
+						.permitAll()
+						// ★以下の1行を念のため追加（/comment/ 配下の全てのPOST/GETを許可）
+						.requestMatchers("/comment/**").permitAll().anyRequest().authenticated())
+				.formLogin(login -> login.loginPage("/login").defaultSuccessUrl("/", true).permitAll())
+				.logout(logout -> logout.logoutSuccessUrl("/login?logout").permitAll());
 
-	    return http.build();
+		return http.build();
 	}
 }
 

@@ -40,6 +40,10 @@ public class Post {
 
 	@Column(name = "video_url")
 	private String videoUrl;
+	
+	//youtube映画予告を差し込むためのentity
+	@Column(name="youtube_video_id")
+	private String youtubeVideoId;
 
 	@Column(name = "created_at", updatable = false)
 	private LocalDateTime createdAt;

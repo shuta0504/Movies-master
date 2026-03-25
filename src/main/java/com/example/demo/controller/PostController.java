@@ -38,19 +38,19 @@ public class PostController {
 
 	@GetMapping("/")
 	public String index(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
-	    List<Post> posts;
-	    
-	    if (keyword != null && !keyword.isEmpty()) {
-	        // 検索キーワードがある場合
-	        posts = postRepository.searchByKeyword(keyword);
-	    } else {
-	        // キーワードがない場合は全件取得
-	        posts = postRepository.findAllWithLikes();
-	    }
-	    
-	    model.addAttribute("posts", posts);
-	    model.addAttribute("keyword", keyword); // 検索窓に値を残すために渡す
-	    return "index";
+		List<Post> posts;
+
+		if (keyword != null && !keyword.isEmpty()) {
+			// 検索キーワードがある場合
+			posts = postRepository.searchByKeyword(keyword);
+		} else {
+			// キーワードがない場合は全件取得
+			posts = postRepository.findAllWithLikes();
+		}
+
+		model.addAttribute("posts", posts);
+		model.addAttribute("keyword", keyword); // 検索窓に値を残すために渡す
+		return "index";
 	}
 
 	@Value("${upload.path}")
@@ -88,6 +88,7 @@ public class PostController {
 		// 内容を書き換える
 		post.setMovieTitle(postData.getMovieTitle());
 		post.setContent(postData.getContent());
+		post.setYoutubeVideoId(postData.getYoutubeVideoId());
 
 		// 画像が新しく選択されていたら差し替え
 		if (imageFile != null && !imageFile.isEmpty()) {
@@ -199,12 +200,14 @@ public class PostController {
 
 	@PostMapping("/post/create")
 	public String createPost(@RequestParam("movieTitle") String movieTitle, @RequestParam("content") String content,
+			@RequestParam(value = "youtubeVideoId", required = false) String youtubeVideoId,
 			@RequestParam("imageFile") MultipartFile imageFile, @RequestParam("videoFile") MultipartFile videoFile)
 			throws IOException {
 
 		Post post = new Post();
 		post.setMovieTitle(movieTitle);
 		post.setContent(content);
+		post.setYoutubeVideoId(youtubeVideoId);
 		post.setUserId(1); // ログイン機能ができるまでは一旦固定値の「１」でセット
 
 		// 画像の保存処理

@@ -3,12 +3,13 @@
 
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>新規投稿 - MOVIES FAN</title>
 	<style>
 		body {
 			font-family: 'Helvetica Neue', Arial, sans-serif;
 			/* 背景画像の設定（映画らしい暗めの画像URLを入れるか、グラデーションに） */
-			background:url('https://t3.ftcdn.net/jpg/04/07/53/02/360_F_407530281_vHv9x4ZIxxfBRM9JOa85gZ8GW03bcpzO.jpg');
+			background: url('https://t3.ftcdn.net/jpg/04/07/53/02/360_F_407530281_vHv9x4ZIxxfBRM9JOa85gZ8GW03bcpzO.jpg');
 			background-size: cover;
 			background-position: center;
 			background-attachment: fixed;
@@ -117,6 +118,12 @@
 
 			<label>動画 (任意)</label>
 			<input type="file" name="videoFile" accept="video/*" />
+
+			<label>YouTube 動画ID (任意)</label>
+			<input type="text" name="youtubeVideoId" placeholder="例: dQw4w9WgXcQ" />
+			<p style="font-size: 0.8em; color: #888; margin-top: -15px; margin-bottom: 20px;">
+				※YouTubeURLの「v=」に続く11桁の文字を入力してください。
+			</p>
 
 			<div class="button-group">
 				<button type="submit" class="submit-btn">投稿する</button>
